@@ -1,47 +1,41 @@
 #include <stdio.h>
 #include <string.h>
 
-#define SIZE 25
-
 void    *ft_memmove(void *dest, const void *src, size_t n)
-{
-  size_t i;
+{   size_t i;
     i = 0;
     
     if (src > dest)
     {
-        while (n > 0 && dest && src)
+        while (i < n)
         {
-            *((char *)dest + i) = *((char *)src + i);
-            i++;
-            n--;
+            *((unsigned char *)dest + i) = *((unsigned char *)src + i);
+            i++;            
         }
         return (dest);
         
     }
     if (src < dest)
     {
-    /* Use *((char *)dest + i)) != '\0' && *((char *)src + i)) 
-    * to work safe with null terminator                       */
-        while (n > 0 && (*(char *)dest + i) != '\0' && (*(char *)src + i) != '\0')
+        while (n--)
         {
-            *((char *)dest + i) = *((char *)src + i);
-            i++;
-            n--;
+            *((unsigned char *)dest + n) = *((unsigned char *)src + n);            
+            //n--;
         }
-        return (dest);
-        
+        return (dest);      
     }
+    return (0);
 }
+
 
 int main(void)
 {
-  char str[SIZE], *p;
+  char str[24], *p;
 
   strcpy(str, "ABCDEFGH1234567890");
   p = str + 5;
 
-  ft_memmove(str+16, p, 13);
+  ft_memmove(str, str+3, 13);
   printf("result of move: %s", str);
 
   return 0;
